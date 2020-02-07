@@ -21,15 +21,16 @@ import java.util.Map;
 public class AutoPay {
     public WebDriver webDriver;
     public tools.Log logger;
-    public static String baseFilePath="C:/Users/lichuang/Desktop/ota-pay";
+    public static String baseFilePath="/var/log/auto-pay";
+//    public static String baseFilePath="C:/Users/lichuang/Desktop/ota-pay";
     public static int defaultSleep=5;
-//    public static String responseUrl="http://nirvana.test.ganhuoche.com/api/client/receive/pay";
-//    public static String payUrl="http://nirvana.test.ganhuoche.com/api/client/get/to/pay/html";
-//    public static String getOrderUrl="http://nirvana.test.ganhuoche.com/api/client/get/to/pay";
-
-    public static String responseUrl="http://nirvana.ganhuoche.com/api/client/receive/pay";
-    public static String payUrl="http://nirvana.ganhuoche.com/api/client/get/to/pay/html";
-    public static String getOrderUrl="http://nirvana.ganhuoche.com/api/client/get/to/pay";
+    public static String responseUrl="http://nirvana.test.ganhuoche.com/api/client/receive/pay";
+    public static String payUrl="http://nirvana.test.ganhuoche.com/api/client/get/to/pay/html";
+    public static String getOrderUrl="http://nirvana.test.ganhuoche.com/api/client/get/to/pay";
+//
+//    public static String responseUrl="http://nirvana.ganhuoche.com/api/client/receive/pay";
+//    public static String payUrl="http://nirvana.ganhuoche.com/api/client/get/to/pay/html";
+//    public static String getOrderUrl="http://nirvana.ganhuoche.com/api/client/get/to/pay";
     public static void main(String[] args) {
         new AutoPay().start();
     }
@@ -89,7 +90,7 @@ public class AutoPay {
     {
         try {
             if (webDriver==null) {
-                System.getProperties().setProperty("webdriver.chrome.driver", "drivers/chromedriver_windows.exe");
+                System.getProperties().setProperty("webdriver.chrome.driver", "drivers/chromedriver");
                 webDriver = new ChromeDriver();
                 webDriver.manage().window().maximize();
             }
@@ -322,10 +323,8 @@ public class AutoPay {
         }catch (Exception e) {
             logger.info("获取订单解析失败");
             logger.error("获取订单失败"+e);
-        }finally {
-            return payOrderInfo;
         }
-
+        return payOrderInfo;
     }
 
     //验证元素是否存在
